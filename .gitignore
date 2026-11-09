@@ -1,0 +1,16 @@
+# Visual Studio
+/.vs/
+/var/.vs/
+*.user
+*.suo
+*.VC.db
+*.VC.VC.opendb
+
+# Build output
+/var/bin/
+/var/obj/
+/var/res/bcvis.dll
+*.pdb
+*.ilk
+*.obj
+*.tlog/
