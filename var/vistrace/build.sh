@@ -1,13 +1,15 @@
 #!/bin/sh
-# Builds res/bcvis.dll with MinGW-w64 (x86_64-w64-mingw32), MinHook linked in statically.
-set -e
+# Builds res/bcvis.dll with MinGW-w64; MinHook is linked statically.
+set -eu
 cd "$(dirname "$0")/.."
 M=vendor/minhook
+CC="${CC:-x86_64-w64-mingw32-gcc}"
+CXX="${CXX:-x86_64-w64-mingw32-g++}"
 OUT=$(mktemp -d)
-for c in $M/src/buffer.c $M/src/hook.c $M/src/trampoline.c $M/src/hde/hde64.c; do
-    x86_64-w64-mingw32-gcc -O2 -c "$c" -I$M/include -o "$OUT/$(basename "$c" .c).o"
+trap 'rm -rf "$OUT"' EXIT HUP INT TERM
+for c in "$M/src/buffer.c" "$M/src/hook.c" "$M/src/trampoline.c" "$M/src/hde/hde64.c"; do
+    "$CC" -O2 -c "$c" -I"$M/include" -o "$OUT/$(basename "$c" .c).o"
 done
-x86_64-w64-mingw32-g++ -std=c++20 -O2 -c vistrace/VisTrace.cpp -I$M/include -o "$OUT/VisTrace.o"
-x86_64-w64-mingw32-g++ -shared -static -s -O2 -o res/bcvis.dll "$OUT"/*.o -Wl,--subsystem,windows
-rm -rf "$OUT"
+"$CXX" -std=c++20 -O2 -c vistrace/VisTrace.cpp -I"$M/include" -o "$OUT/VisTrace.o"
+"$CXX" -shared -static -s -O2 -o res/bcvis.dll "$OUT"/*.o -Wl,--subsystem,windows
 echo "res/bcvis.dll built"
