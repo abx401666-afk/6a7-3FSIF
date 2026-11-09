@@ -1,0 +1,6 @@
+[submodule "var/vendor/imgui"]
+	path = var/vendor/imgui
+	url = https://github.com/ocornut/imgui.git
+[submodule "var/vendor/minhook"]
+	path = var/vendor/minhook
+	url = https://github.com/TsudaKageyu/minhook.git
