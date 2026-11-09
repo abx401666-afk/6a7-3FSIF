@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}</ProjectGuid>
+    <RootNamespace>BodycamExternalMod</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(ProjectDir)bin\$(Platform)\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)obj\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>var</TargetName>
+    <TargetExt>.exe</TargetExt>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level4</WarningLevel>
+      <SDLCheck>false</SDLCheck>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;UNICODE;_UNICODE;WINVER=0x0A00;_WIN32_WINNT=0x0A00;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>d3d12.lib;dxgi.lib;dcomp.lib;user32.lib;gdi32.lib;winmm.lib;shell32.lib;advapi32.lib;runtimeobject.lib;shcore.lib;windowscodecs.lib;ole32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+
+  <ItemGroup>
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\GameOffsets.cpp" />
+    <ClCompile Include="src\MediaSession.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="res\var.rc" />
+    <ClCompile Include="src\Memory.cpp" />
+    <ClCompile Include="src\OverlayRenderer.cpp" />
+    <ClCompile Include="src\ESP.cpp" />
+    <ClCompile Include="src\Skeleton.cpp" />
+    <ClCompile Include="src\Targets.cpp" />
+    <ClCompile Include="src\Aimbot.cpp" />
+    <ClCompile Include="src\Visibility.cpp" />
+    <ClCompile Include="src\Menu.cpp" />
+    <ClCompile Include="src\UiKit.cpp" />
+    <ClCompile Include="src\Config.cpp" />
+    <ClCompile Include="src\Hud.cpp" />
+    <ClCompile Include="src\Ammo.cpp" />
+    <ClCompile Include="src\Misc.cpp" />
+    <ClCompile Include="src\Host.cpp" />
+    <ClCompile Include="src\MenuInput.cpp" />
+    <ClCompile Include="src\Fx.cpp" />
+    <ClCompile Include="src\MenuUI.cpp" />
+    <ClCompile Include="src\World.cpp" />
+    <ClCompile Include="src\CombatLog.cpp" />
+    <ClCompile Include="src\Lens.cpp" />
+    <ClCompile Include="src\Reload.cpp" />
+    <ClCompile Include="src\Log.cpp" />
+    <ClCompile Include="src\WeaponIcons.cpp" />
+    <ClCompile Include="src\GameSettings.cpp" />
+    <ClCompile Include="vendor\imgui\imgui.cpp" />
+    <ClCompile Include="vendor\imgui\imgui_draw.cpp" />
+    <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="vendor\imgui\imgui_tables.cpp" />
+    <ClCompile Include="vendor\imgui\imgui_impl_win32.cpp" />
+    <ClCompile Include="vendor\imgui\imgui_impl_dx12.cpp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ClInclude Include="include\UETypes.hpp" />
+    <ClInclude Include="include\Memory.hpp" />
+    <ClInclude Include="include\OverlayRenderer.hpp" />
+    <ClInclude Include="include\ESP.hpp" />
+    <ClInclude Include="include\Skeleton.hpp" />
+    <ClInclude Include="include\Targets.hpp" />
+    <ClInclude Include="include\Aimbot.hpp" />
+    <ClInclude Include="include\Visibility.hpp" />
+    <ClInclude Include="include\MenuUI.hpp" />
+    <ClInclude Include="include\UiKit.hpp" />
+    <ClInclude Include="include\Config.hpp" />
+    <ClInclude Include="include\Hud.hpp" />
+    <ClInclude Include="include\Ammo.hpp" />
+    <ClInclude Include="include\Misc.hpp" />
+    <ClInclude Include="include\World.hpp" />
+    <ClInclude Include="include\CombatLog.hpp" />
+    <ClInclude Include="include\Lens.hpp" />
+    <ClInclude Include="include\Reload.hpp" />
+    <ClInclude Include="include\Log.hpp" />
+    <ClInclude Include="include\WeaponIcons.hpp" />
+    <ClInclude Include="include\GameSettings.hpp" />
+  </ItemGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>
