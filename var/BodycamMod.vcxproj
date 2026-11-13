@@ -38,7 +38,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)vendor\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(ProjectDir)vendor\imgui;$(ProjectDir)vendor\imgui\backends;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;NDEBUG;WIN32_LEAN_AND_MEAN;NOMINMAX;UNICODE;_UNICODE;WINVER=0x0A00;_WIN32_WINNT=0x0A00;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -88,8 +88,8 @@
     <ClCompile Include="vendor\imgui\imgui_draw.cpp" />
     <ClCompile Include="vendor\imgui\imgui_widgets.cpp" />
     <ClCompile Include="vendor\imgui\imgui_tables.cpp" />
-    <ClCompile Include="vendor\imgui\imgui_impl_win32.cpp" />
-    <ClCompile Include="vendor\imgui\imgui_impl_dx12.cpp" />
+    <ClCompile Include="vendor\imgui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="vendor\imgui\backends\imgui_impl_dx12.cpp" />
   </ItemGroup>
 
   <ItemGroup>

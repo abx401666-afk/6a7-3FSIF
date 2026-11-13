@@ -1,0 +1,62 @@
+name: Windows build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'var/**'
+      - '.gitmodules'
+      - '.github/workflows/windows-build.yml'
+  pull_request:
+    paths:
+      - 'var/**'
+      - '.gitmodules'
+      - '.github/workflows/windows-build.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2022
+    steps:
+      - name: Check out source and submodules
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install MinGW-w64 compiler
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: MINGW64
+          update: true
+          install: mingw-w64-x86_64-gcc
+
+      - name: Build embedded bcvis helper DLL
+        shell: msys2 {0}
+        run: |
+          cd var
+          CC=gcc CXX=g++ bash vistrace/build.sh
+
+      - name: Set up MSBuild
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build /var (Release x64)
+        shell: pwsh
+        run: msbuild .\var\BodycamMod.sln /m /p:Configuration=Release /p:Platform=x64 /verbosity:minimal
+
+      - name: Verify build outputs
+        shell: pwsh
+        run: |
+          if (-not (Test-Path 'var/res/bcvis.dll')) { throw 'bcvis.dll was not generated.' }
+          if (-not (Test-Path 'var/bin/x64/Release/var.exe')) { throw 'var.exe was not generated.' }
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: var-windows-x64-release
+          path: |
+            var/bin/x64/Release/var.exe
+            var/res/bcvis.dll
+          if-no-files-found: error
